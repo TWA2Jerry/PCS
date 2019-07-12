@@ -11,8 +11,9 @@ int main(void) {
 	number = (lower+upper)/2;
 	printf("%li\n", number);
 	
-	scanf("%*li%s\n", reply);
-	while(reply[0] != 'O'){
+	scanf("%s", reply);
+
+	while(reply[0] != 'O' && reply[1] != 'O'){
 
 		if(reply[0] == 'S'){
             lower = number;
@@ -24,12 +25,14 @@ int main(void) {
 		}
 
 		else{
-            upper = number;
+            		upper = number;
 			number = (lower+upper)/2;
-        }
+        	}
 
 		printf("%li\n", number);
-		scanf("%s\n", reply);
+		scanf("%s", reply);
+	
+	
 
 	}
 
