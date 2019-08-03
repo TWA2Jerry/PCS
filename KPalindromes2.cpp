@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#define INF 1000000
 
 using namespace std;
 
@@ -16,16 +17,16 @@ int distance(string a){
 	}	
 
 	string b(a);
-	words[a] = 1000000;
+	words[a] = INF;
 	reverse(b.begin(), b.end());
 	
-	if(b == a){
+	if(b.compare(a) == 0){
 
 		words[a] = 0;
-		return 0;	
+		return words[a];	
 
 	}	else{
-			int best = 1000000;
+			int best = INF;
 			for(int i = 0; i < (int)a.length(); i++){
 				string c(a);
 				c.erase(c.begin()+i);
@@ -54,7 +55,8 @@ int main(void){
 		string a;
 		cin >> a;
 		strings.push_back(a);
-		words[a] = distance(a);
+		int best = distance(a);
+		words[a] = best;
 	}
 
 	for(int i = 0; i<num_test; i++){
