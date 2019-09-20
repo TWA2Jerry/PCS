@@ -66,27 +66,18 @@ int main(void){
 		adj[a].push_back(b);
 		adj[b].push_back(a);
 	}
-	printf("Finished scanning\n");
 
 	dfs(N-1, -1, adj, subtree_sizes);	
-	printf("Finished dfs\n");
-	for(int i = 0; i<N; i++){
-		printf("%d\n", subtree_sizes[i]);
-	}	
-
-
+	
 	int centroid = find_centroid(N-1, N, adj, subtree_sizes, seen);
 	seen[centroid] = true;
-	printf("Found centroid: %d\n", centroid);
 	queue<int> q;
 	q.push(centroid);	
 
 	while(!q.empty()){
 		int u = q.front(); q.pop();
-		printf("Centroid %d: ", u);
 		for(auto s : adj[u]){
 			if(!seen[s]){
-				printf("%d ", s);
 				int subtree_centroid  = find_centroid(s, subtree_sizes[s], adj,subtree_sizes, seen);
 				q.push(subtree_centroid);
 				seen[subtree_centroid] = true;
@@ -95,31 +86,8 @@ int main(void){
 				centroid_tree[subtree_centroid].push_back(u);
 			}
 		}
-		printf("\n");	
 	}
 	
-	//Now getting ready to print
-	q.push(centroid);
-	for(int i = 0; i<N; i++){
-		seen[i] = false;
-	}	
-
-	printf("Final Tree:\n");	
-	
-	printf("%d\n", centroid);
-	seen[centroid] = true;
-	while(!q.empty()){
-		int u = q.front(); q.pop();
-		for(auto s:centroid_tree[u]){
-			if(seen[s]){
-				continue;
-			}
-			q.push(s);
-			seen[s] = true;
-			printf(" %d ", s);
-		}
-		printf("\n");
-	}
 
 	printf("All done\n");
 	return 0;
