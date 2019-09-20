@@ -2,7 +2,6 @@
 
 using namespace std;
 
-int N, no_edges;
 
 void dfs(int s, int e, vector<int> * adj, int * sizes){
 
@@ -47,15 +46,16 @@ int find_centroid(int u, int n, vector<int> * adj, int * sizes, bool * seen){
 
 
 int main(void){
-
-	scanf("%d %d", &N, &no_edges);
+	
+	int N;
+	scanf("%d", &N);
 		
 	int subtree_sizes[N];
 	vector <int> adj[N];
 	vector<int> centroid_tree[N];
 	bool seen[N];
 
-	for(int i = 0; i<N; i++){
+	for(int i = 0; i < N; i++){
 		seen[i] = false;
 		subtree_sizes[i] = 0;
 	}
@@ -68,7 +68,8 @@ int main(void){
 	}
 
 	dfs(N-1, -1, adj, subtree_sizes);	
-	
+
+
 	int centroid = find_centroid(N-1, N, adj, subtree_sizes, seen);
 	seen[centroid] = true;
 	queue<int> q;
