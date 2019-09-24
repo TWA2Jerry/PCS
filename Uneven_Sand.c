@@ -5,38 +5,43 @@
 
 int main(void) {
 
-	long number, lower = 1 , upper = 2000000000;
-	char * reply  = (char*)malloc(10*sizeof(char));
-	
+	unsigned long int number, lower = 1 , upper = 2000000000;
+	char reply[10];
+	int counter = 1;
 	number = (lower+upper)/2;
-	printf("%li\n", number);
-	
+		
+	printf("%lu\n", number);
 	scanf("%s", reply);
 
-	while(reply[0] != 'O' && reply[1] != 'O'){
+	while(reply[0] != 'O'){
+
 
 		if(reply[0] == 'S'){
-            lower = number;
+			lower = number;
 			number = (lower+upper)/2;
-            if(number == lower){
-                printf("%li\n", number+1);
-                break;
-            }
+			
+			if(number == lower || counter == 31){
+				printf("%lu\n", number+1);
+				break;
+			}
+
+			counter++;
+		} else{
+			upper = number;
+			number = (lower+upper)/2;
+
+			if(counter == 31){
+				printf("%lu\n", number-1);
+				break;
+			}
+			counter++;
 		}
 
-		else{
-            		upper = number;
-			number = (lower+upper)/2;
-        	}
-
-		printf("%li\n", number);
-		scanf("%s", reply);
-	
-	
-
+		printf("%lu\n", number);
+		scanf("%s",reply); 		
+				
 	}
 
+
 	return 0;
-
-
 }
